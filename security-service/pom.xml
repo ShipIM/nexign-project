@@ -70,7 +70,6 @@
                         </exclude>
                     </excludes>
                 </configuration>
-
                 <executions>
                     <execution>
                         <goals>

@@ -31,7 +31,6 @@
 				<configuration>
 					<mainClass>com.example.servicediscovery.ServiceDiscoveryApplication</mainClass>
 				</configuration>
-
 				<executions>
 					<execution>
 						<goals>

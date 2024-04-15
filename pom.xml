@@ -22,6 +22,7 @@
         <module>demo-service</module>
         <module>security-service</module>
         <module>security-utils</module>
+        <module>commutator</module>
     </modules>
 
     <dependencyManagement>

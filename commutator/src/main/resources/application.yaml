@@ -1,0 +1,30 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+server:
+  port: 8083
+
+spring:
+  application:
+    name: commutator
+  kafka:
+    bootstrap-servers:
+      - localhost:9092
+      - localhost:9093
+      - localhost:9094
+    topic:
+      outbound-topic: "cdr"
+      partitions-number: 1
+      replication-factor: 3
+  liquibase:
+    change-log: classpath:/db/changelog/changelog-master.xml
+  h2:
+    console:
+      enabled: true
+  datasource:
+    url: jdbc:h2:mem:nexign
+    driver-class-name: org.h2.Driver
+    username: username
+    password: password
