@@ -14,7 +14,6 @@ import org.springframework.context.ApplicationContextAware;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.concurrent.*;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @SpringBootApplication
 public class CommutatorApplication implements CommandLineRunner, ApplicationContextAware {
@@ -28,12 +27,8 @@ public class CommutatorApplication implements CommandLineRunner, ApplicationCont
     }
 
     @Override
-    public void run(String... args) {
+    public void run(String... args) throws InterruptedException {
         var queue = new PriorityBlockingQueue<Transaction>();
-        var counter = new AtomicInteger(WRITERS_AMOUNT);
-
-        var writeSemaphore = new Semaphore(WRITERS_AMOUNT, true);
-        var readSemaphore = new Semaphore(0);
 
         var timeStart = 1L;
         var timeLimit = 1000L;
@@ -46,31 +41,26 @@ public class CommutatorApplication implements CommandLineRunner, ApplicationCont
         var readOnlyNumbers = Collections.unmodifiableList(availableNumbers);
 
         ExecutorService executorService = Executors.newFixedThreadPool(WRITERS_AMOUNT);
-        for (int i = 0; i < WRITERS_AMOUNT; i++) {
-            executorService.submit(new TransactionGenerator(queue, writeSemaphore, counter, readSemaphore, timeStart,
-                    timeLimit, timeGap, readOnlyNumbers));
-        }
 
-        while (true) {
-            try {
-                readSemaphore.acquire();
-
-                if (queue.isEmpty()) {
-                    executorService.shutdownNow();
-
-                    break;
-                }
-
-                while (!queue.isEmpty()) {
-                    System.out.println(queue.poll());
-                }
-
-                counter.set(WRITERS_AMOUNT);
-                writeSemaphore.release(WRITERS_AMOUNT);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
+        var timeCurrent = timeStart;
+        while (timeCurrent < timeLimit) {
+            var countDownLatch = new CountDownLatch(WRITERS_AMOUNT);
+            var bound = timeCurrent + timeGap;
+            for (int i = 0; i < WRITERS_AMOUNT; i++) {
+                executorService.submit(new TransactionGenerator(queue, countDownLatch,  readOnlyNumbers, timeCurrent,
+                        bound));
             }
+
+            countDownLatch.await();
+
+            while (!queue.isEmpty()) {
+                System.out.println(queue.poll());
+            }
+
+            timeCurrent = bound;
         }
+
+        executorService.shutdown();
     }
 
     @Override

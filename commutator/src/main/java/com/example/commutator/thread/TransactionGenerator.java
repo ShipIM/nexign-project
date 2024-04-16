@@ -5,58 +5,33 @@ import com.example.commutator.model.entity.Customer;
 import lombok.AllArgsConstructor;
 
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.PriorityBlockingQueue;
-import java.util.concurrent.Semaphore;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @AllArgsConstructor
 public class TransactionGenerator implements Runnable {
 
     private final PriorityBlockingQueue<Transaction> transactions;
-
-    private final Semaphore writeSemaphore;
-    private final AtomicInteger readyCounter;
-
-    private final Semaphore readSemaphore;
-
+    private final CountDownLatch countDownLatch;
+    private final List<Customer> availableCustomers;
     private final long timeStart;
     private final long timeLimit;
-    private final int timeGap;
 
-    private final List<Customer> availableCustomers;
 
     @Override
     public void run() {
-        try {
-            var timeStartCurrentGap = timeStart;
-            var callStart = timeStartCurrentGap;
+        var callStart = timeStart;
 
-            while (timeStartCurrentGap + timeGap < timeLimit) {
-                writeSemaphore.acquire();
-
-                while (timeStartCurrentGap + timeGap > callStart) {
-                    callStart = generateTransaction(callStart);
-                }
-
-                if (readyCounter.decrementAndGet() == 0) {
-                    readSemaphore.release();
-                }
-
-                timeStartCurrentGap += timeGap;
-            }
-
-            writeSemaphore.acquire();
-            if (readyCounter.decrementAndGet() == 0) {
-                readSemaphore.release();
-            }
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
+        while (timeLimit > callStart) {
+            callStart = generateTransaction(callStart);
         }
+
+        countDownLatch.countDown();
     }
 
     private long generateTransaction(long callStart) {
-        var customersAmount = availableCustomers.size();
+        var customersAmount = availableCustomers.size() - 1;
 
         var type = (short) ThreadLocalRandom.current().nextInt(1, 2);
         var maintenance = ThreadLocalRandom.current().nextInt(0, customersAmount);
@@ -64,7 +39,7 @@ public class TransactionGenerator implements Runnable {
         while (connection == maintenance) {
             connection = ThreadLocalRandom.current().nextInt(0, customersAmount + 1);
         }
-        var callEnd = callStart + ThreadLocalRandom.current().nextInt(0, timeGap);
+        var callEnd = callStart + ThreadLocalRandom.current().nextLong(0, timeLimit - timeStart);
 
         var maintenanceCustomer = availableCustomers.get(maintenance);
         var connectionCustomer = availableCustomers.get(connection);
