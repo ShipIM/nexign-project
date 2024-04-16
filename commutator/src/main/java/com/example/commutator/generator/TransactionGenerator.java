@@ -1,4 +1,4 @@
-package com.example.commutator.thread;
+package com.example.commutator.generator;
 
 import com.example.commutator.model.Transaction;
 import com.example.commutator.model.entity.Customer;
@@ -17,7 +17,6 @@ public class TransactionGenerator implements Runnable {
     private final List<Customer> availableCustomers;
     private final long timeStart;
     private final long timeLimit;
-
 
     @Override
     public void run() {

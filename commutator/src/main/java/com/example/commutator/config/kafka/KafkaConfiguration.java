@@ -1,4 +1,4 @@
-package com.example.commutator.config;
+package com.example.commutator.config.kafka;
 
 import com.example.commutator.model.Transaction;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +16,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 
+import java.util.List;
 import java.util.Map;
 
 @Configuration
@@ -43,11 +44,11 @@ public class KafkaConfiguration {
     }
 
     @Bean
-    public KafkaTemplate<String, Transaction[]> kafkaTemplate() {
+    public KafkaTemplate<String, List<Transaction>> kafkaTemplate() {
         return new KafkaTemplate<>(cdrProducerFactory());
     }
 
-    private ProducerFactory<String, Transaction[]> cdrProducerFactory() {
+    private ProducerFactory<String, List<Transaction>> cdrProducerFactory() {
         return new DefaultKafkaProducerFactory<>(producerProps());
     }
 

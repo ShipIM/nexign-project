@@ -23,3 +23,11 @@ spring:
     driver-class-name: org.h2.Driver
     username: username
     password: password
+
+generator:
+  writers-amount: 200
+  cdr-size: 10
+  year: 2024
+  month-start: 1
+  month-end: 1
+  time-gap: 10000

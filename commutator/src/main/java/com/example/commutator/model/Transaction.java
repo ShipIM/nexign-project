@@ -1,13 +1,15 @@
 package com.example.commutator.model;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
-public class Transaction implements Comparable<Transaction>{
+public class Transaction implements Comparable<Transaction> {
 
     private short type;
 
@@ -20,8 +22,8 @@ public class Transaction implements Comparable<Transaction>{
     private long end;
 
     @Override
-    public int compareTo(Transaction o) {
-        return Long.compare(this.start, o.start);
+    public int compareTo(Transaction transaction) {
+        return Long.compare(this.start, transaction.start);
     }
 
 }

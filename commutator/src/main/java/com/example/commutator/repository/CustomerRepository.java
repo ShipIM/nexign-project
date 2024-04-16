@@ -1,4 +1,4 @@
-package com.example.commutator.api.repository;
+package com.example.commutator.repository;
 
 import com.example.commutator.model.entity.Customer;
 import org.springframework.data.repository.CrudRepository;
