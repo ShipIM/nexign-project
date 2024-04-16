@@ -3,9 +3,9 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
-    <changeSet author="ShipIM" id="15-04-2024--1-create-number-table">
-        <createTable tableName="number">
-            <column name="number" type="INTEGER">
+    <changeSet author="ShipIM" id="15-04-2024--1-create-customer-table">
+        <createTable tableName="customer">
+            <column name="number" type="BIGINT">
                 <constraints
                         primaryKey="true"/>
             </column>

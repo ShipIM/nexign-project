@@ -1,24 +1,22 @@
 package com.example.commutator.model.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
-@Table(name = "number")
+@Table(name = "CUSTOMER")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class Number {
+@EqualsAndHashCode
+public class Customer {
 
     @Id
-    private Integer number;
+    private long number;
 
-    @Column("is_customer")
-    private Boolean isCustomer;
+    @Column("IS_CUSTOMER")
+    private boolean isCustomer;
 
 }

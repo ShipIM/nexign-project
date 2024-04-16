@@ -1,7 +1,7 @@
 package com.example.commutator.thread;
 
 import com.example.commutator.model.Transaction;
-import com.example.commutator.model.entity.Number;
+import com.example.commutator.model.entity.Customer;
 import lombok.AllArgsConstructor;
 
 import java.util.List;
@@ -24,7 +24,7 @@ public class TransactionGenerator implements Runnable {
     private final Long timeLimit;
     private final Integer timeGap;
 
-    private final List<Number> availableNumbers;
+    private final List<Customer> availableCustomers;
 
     @Override
     public void run() {
@@ -35,29 +35,45 @@ public class TransactionGenerator implements Runnable {
             while (timeStartCurrentGap + timeGap < timeLimit) {
                 writeSemaphore.acquire();
 
-                var type = (short) ThreadLocalRandom.current().nextInt(1, 2);
-                var maintenance = ThreadLocalRandom.current().nextInt(0, availableNumbers.size() + 1);
-                var connection = ThreadLocalRandom.current().nextInt(0, availableNumbers.size() + 1);
-                while (connection == maintenance) {
-                    connection = ThreadLocalRandom.current().nextInt(0, availableNumbers.size() + 1);
+                while (timeStartCurrentGap + timeGap > callStart) {
+                    callStart = generateTransaction(callStart);
                 }
-                var callEnd = callStart + ThreadLocalRandom.current().nextInt(0, timeGap);
-                var transaction = new Transaction(type, maintenance, connection, callStart, callEnd);
 
-                transactions.add(transaction);
-                callStart = callEnd;
-
-                if (timeStartCurrentGap + timeGap < callStart) {
-                    if (readyCounter.decrementAndGet() == 0) {
-                        readSemaphore.release();
-
-                        timeStartCurrentGap += timeGap;
-                    }
+                if (readyCounter.decrementAndGet() == 0) {
+                    readSemaphore.release();
                 }
+
+                timeStartCurrentGap += timeGap;
+            }
+
+            writeSemaphore.acquire();
+            if (readyCounter.decrementAndGet() == 0) {
+                readSemaphore.release();
             }
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
+    }
+
+    private Long generateTransaction(Long callStart) {
+        var type = (short) ThreadLocalRandom.current().nextInt(1, 2);
+        var maintenance = availableCustomers.get(ThreadLocalRandom.current()
+                .nextInt(0, availableCustomers.size() + 1));
+        var connection = availableCustomers.get(ThreadLocalRandom.current()
+                .nextInt(0, availableCustomers.size() + 1));
+        while (connection.equals(maintenance)) {
+            connection = availableCustomers.get(ThreadLocalRandom.current()
+                    .nextInt(0, availableCustomers.size() + 1));
+        }
+        var callEnd = callStart + ThreadLocalRandom.current().nextInt(0, timeGap);
+
+        transactions.put(new Transaction(type, maintenance.getNumber(), connection.getNumber(), callStart, callEnd));
+        if (connection.isCustomer()) {
+            transactions.put(new Transaction((short) (type % 2 == 0 ? 1 : 2), connection.getNumber(),
+                    maintenance.getNumber(), callStart, callEnd));
+        }
+
+        return callEnd;
     }
 
 }
