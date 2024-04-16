@@ -10,13 +10,12 @@ import org.springframework.data.relational.core.mapping.Table;
 @NoArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode
 public class Customer {
 
     @Id
     private long number;
 
-    @Column("IS_CUSTOMER")
-    private boolean isCustomer;
+    @Column("IS_ROMASHKA")
+    private boolean isRomashka;
 
 }

@@ -9,7 +9,7 @@
                 <constraints
                         primaryKey="true"/>
             </column>
-            <column name="is_customer" type="BOOLEAN">
+            <column name="is_romashka" type="BOOLEAN">
                 <constraints
                     nullable="false"/>
             </column>

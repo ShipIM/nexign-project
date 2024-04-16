@@ -20,9 +20,9 @@ public class TransactionGenerator implements Runnable {
 
     private final Semaphore readSemaphore;
 
-    private final Long timeStart;
-    private final Long timeLimit;
-    private final Integer timeGap;
+    private final long timeStart;
+    private final long timeLimit;
+    private final int timeGap;
 
     private final List<Customer> availableCustomers;
 
@@ -55,22 +55,24 @@ public class TransactionGenerator implements Runnable {
         }
     }
 
-    private Long generateTransaction(Long callStart) {
+    private long generateTransaction(long callStart) {
+        var customersAmount = availableCustomers.size();
+
         var type = (short) ThreadLocalRandom.current().nextInt(1, 2);
-        var maintenance = availableCustomers.get(ThreadLocalRandom.current()
-                .nextInt(0, availableCustomers.size() + 1));
-        var connection = availableCustomers.get(ThreadLocalRandom.current()
-                .nextInt(0, availableCustomers.size() + 1));
-        while (connection.equals(maintenance)) {
-            connection = availableCustomers.get(ThreadLocalRandom.current()
-                    .nextInt(0, availableCustomers.size() + 1));
+        var maintenance = ThreadLocalRandom.current().nextInt(0, customersAmount);
+        var connection = ThreadLocalRandom.current().nextInt(0, customersAmount);
+        while (connection == maintenance) {
+            connection = ThreadLocalRandom.current().nextInt(0, customersAmount + 1);
         }
         var callEnd = callStart + ThreadLocalRandom.current().nextInt(0, timeGap);
 
-        transactions.put(new Transaction(type, maintenance.getNumber(), connection.getNumber(), callStart, callEnd));
-        if (connection.isCustomer()) {
-            transactions.put(new Transaction((short) (type % 2 == 0 ? 1 : 2), connection.getNumber(),
-                    maintenance.getNumber(), callStart, callEnd));
+        var maintenanceCustomer = availableCustomers.get(maintenance);
+        var connectionCustomer = availableCustomers.get(connection);
+        transactions.put(new Transaction(type, maintenanceCustomer.getNumber(), connectionCustomer.getNumber(),
+                callStart, callEnd));
+        if (connectionCustomer.isRomashka()) {
+            transactions.put(new Transaction((short) (type % 2 == 0 ? 1 : 2), connectionCustomer.getNumber(),
+                    maintenanceCustomer.getNumber(), callStart, callEnd));
         }
 
         return callEnd;

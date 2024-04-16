@@ -6,83 +6,83 @@
     <changeSet author="ShipIM" id="15-04-2024--2-create-customers">
         <insert tableName="customer">
             <column name="number" value="74954990243"/>
-            <column name="is_customer" value="TRUE"/>
+            <column name="is_romashka" value="TRUE"/>
         </insert>
         <insert tableName="customer">
             <column name="number" value="72324298144"/>
-            <column name="is_customer" value="FALSE"/>
+            <column name="is_romashka" value="FALSE"/>
         </insert>
         <insert tableName="customer">
             <column name="number" value="74790614082"/>
-            <column name="is_customer" value="TRUE"/>
+            <column name="is_romashka" value="TRUE"/>
         </insert>
         <insert tableName="customer">
             <column name="number" value="72034809501"/>
-            <column name="is_customer" value="FALSE"/>
+            <column name="is_romashka" value="FALSE"/>
         </insert>
         <insert tableName="customer">
             <column name="number" value="76301336509"/>
-            <column name="is_customer" value="TRUE"/>
+            <column name="is_romashka" value="TRUE"/>
         </insert>
         <insert tableName="customer">
             <column name="number" value="72762628259"/>
-            <column name="is_customer" value="FALSE"/>
+            <column name="is_romashka" value="FALSE"/>
         </insert>
         <insert tableName="customer">
             <column name="number" value="78459967293"/>
-            <column name="is_customer" value="TRUE"/>
+            <column name="is_romashka" value="TRUE"/>
         </insert>
         <insert tableName="customer">
             <column name="number" value="72413181791"/>
-            <column name="is_customer" value="FALSE"/>
+            <column name="is_romashka" value="FALSE"/>
         </insert>
         <insert tableName="customer">
             <column name="number" value="72013335525"/>
-            <column name="is_customer" value="TRUE"/>
+            <column name="is_romashka" value="TRUE"/>
         </insert>
         <insert tableName="customer">
             <column name="number" value="72470375485"/>
-            <column name="is_customer" value="FALSE"/>
+            <column name="is_romashka" value="FALSE"/>
         </insert>
         <insert tableName="customer">
             <column name="number" value="79231403499"/>
-            <column name="is_customer" value="TRUE"/>
+            <column name="is_romashka" value="TRUE"/>
         </insert>
         <insert tableName="customer">
             <column name="number" value="72909453289"/>
-            <column name="is_customer" value="FALSE"/>
+            <column name="is_romashka" value="FALSE"/>
         </insert>
         <insert tableName="customer">
             <column name="number" value="79246886975"/>
-            <column name="is_customer" value="TRUE"/>
+            <column name="is_romashka" value="TRUE"/>
         </insert>
         <insert tableName="customer">
             <column name="number" value="72969421131"/>
-            <column name="is_customer" value="FALSE"/>
+            <column name="is_romashka" value="FALSE"/>
         </insert>
         <insert tableName="customer">
             <column name="number" value="78275455700"/>
-            <column name="is_customer" value="TRUE"/>
+            <column name="is_romashka" value="TRUE"/>
         </insert>
         <insert tableName="customer">
             <column name="number" value="79996528599"/>
-            <column name="is_customer" value="FALSE"/>
+            <column name="is_romashka" value="FALSE"/>
         </insert>
         <insert tableName="customer">
             <column name="number" value="73608544992"/>
-            <column name="is_customer" value="TRUE"/>
+            <column name="is_romashka" value="TRUE"/>
         </insert>
         <insert tableName="customer">
             <column name="number" value="75792884055"/>
-            <column name="is_customer" value="FALSE"/>
+            <column name="is_romashka" value="FALSE"/>
         </insert>
         <insert tableName="customer">
             <column name="number" value="72072068353"/>
-            <column name="is_customer" value="TRUE"/>
+            <column name="is_romashka" value="TRUE"/>
         </insert>
         <insert tableName="customer">
             <column name="number" value="71885168812"/>
-            <column name="is_customer" value="FALSE"/>
+            <column name="is_romashka" value="FALSE"/>
         </insert>
     </changeSet>
 </databaseChangeLog>

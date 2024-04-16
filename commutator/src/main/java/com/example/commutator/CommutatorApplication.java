@@ -12,6 +12,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -42,21 +43,22 @@ public class CommutatorApplication implements CommandLineRunner, ApplicationCont
         var iterableNumbers = numbersRepository.findAll();
         var availableNumbers = new ArrayList<Customer>();
         iterableNumbers.forEach(availableNumbers::add);
+        var readOnlyNumbers = Collections.unmodifiableList(availableNumbers);
 
         ExecutorService executorService = Executors.newFixedThreadPool(WRITERS_AMOUNT);
-        executorService.submit(new TransactionGenerator(queue, writeSemaphore, counter, readSemaphore, timeStart,
-                timeLimit, timeGap, availableNumbers));
-        executorService.submit(new TransactionGenerator(queue, writeSemaphore, counter, readSemaphore, timeStart,
-                timeLimit, timeGap, availableNumbers));
-        executorService.submit(new TransactionGenerator(queue, writeSemaphore, counter, readSemaphore, timeStart,
-                timeLimit, timeGap, availableNumbers));
+        for (int i = 0; i < WRITERS_AMOUNT; i++) {
+            executorService.submit(new TransactionGenerator(queue, writeSemaphore, counter, readSemaphore, timeStart,
+                    timeLimit, timeGap, readOnlyNumbers));
+        }
 
         while (true) {
             try {
                 readSemaphore.acquire();
 
                 if (queue.isEmpty()) {
-                    return;
+                    executorService.shutdownNow();
+
+                    break;
                 }
 
                 while (!queue.isEmpty()) {
