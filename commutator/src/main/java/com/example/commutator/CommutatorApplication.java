@@ -9,9 +9,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.data.jdbc.repository.config.EnableJdbcAuditing;
 
 @SpringBootApplication
 @EnableConfigurationProperties(value = GeneratorProperties.class)
+@EnableJdbcAuditing
 public class CommutatorApplication implements CommandLineRunner, ApplicationContextAware {
 
     private ApplicationContext context;
@@ -21,7 +23,7 @@ public class CommutatorApplication implements CommandLineRunner, ApplicationCont
     }
 
     @Override
-    public void run(String... args) throws InterruptedException {
+    public void run(String... args) {
         var cdrGenerator = context.getBean(CdrGenerator.class);
 
         cdrGenerator.generateCdr();

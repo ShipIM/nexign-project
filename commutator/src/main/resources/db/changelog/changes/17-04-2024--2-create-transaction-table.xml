@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    <changeSet author="ShipIM" id="17-04-2024--2-create-transaction-table">
+        <createTable tableName="transaction">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints
+                        primaryKey="true"/>
+            </column>
+            <column name="call_type" type="TINYINT">
+                <constraints
+                    nullable="false"/>
+            </column>
+            <column name="maintenance_number" type="BIGINT">
+                <constraints
+                        nullable="false"/>
+            </column>
+            <column name="connection_number" type="BIGINT">
+                <constraints
+                        nullable="false"/>
+            </column>
+            <column name="call_start" type="BIGINT">
+                <constraints
+                        nullable="false"/>
+            </column>
+            <column name="call_end" type="BIGINT">
+                <constraints
+                        nullable="false"/>
+            </column>
+            <column name="cdr_id" type="BIGINT">
+                <constraints
+                        nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="transaction" baseColumnNames="maintenance_number"
+                                 constraintName="transaction_maintenance_number_fkey"
+                                 referencedTableName="customer" referencedColumnNames="number"
+                                 onDelete="CASCADE" onUpdate="CASCADE"/>
+        <addForeignKeyConstraint baseTableName="transaction" baseColumnNames="connection_number"
+                                 constraintName="transaction_connection_number_fkey"
+                                 referencedTableName="customer" referencedColumnNames="number"
+                                 onDelete="CASCADE" onUpdate="CASCADE"/>
+        <addForeignKeyConstraint baseTableName="transaction" baseColumnNames="cdr_id"
+                                 constraintName="transaction_cdr_fkey"
+                                 referencedTableName="cdr" referencedColumnNames="id"
+                                 onDelete="CASCADE" onUpdate="CASCADE"/>
+    </changeSet>
+</databaseChangeLog>

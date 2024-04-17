@@ -4,21 +4,28 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
-@Table(name = "CUSTOMER")
+import java.time.LocalDate;
+
+@Table(name = "CDR")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class Customer {
+public class Cdr {
 
     @Id
-    private long number;
+    private long id;
 
-    @Column("IS_ROMASHKA")
-    private boolean romashka;
+    @Column("IS_SENT")
+    private boolean sent;
+
+    @Column("CREATED_DATE")
+    @CreatedDate
+    private LocalDate created;
 
 }

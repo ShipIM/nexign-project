@@ -1,7 +1,7 @@
 package com.example.commutator.generator;
 
-import com.example.commutator.model.Transaction;
 import com.example.commutator.model.entity.Customer;
+import com.example.commutator.model.entity.Transaction;
 import lombok.AllArgsConstructor;
 
 import java.util.List;
@@ -38,15 +38,27 @@ public class TransactionGenerator implements Runnable {
         while (connection == maintenance) {
             connection = ThreadLocalRandom.current().nextInt(0, customersAmount + 1);
         }
-        var callEnd = callStart + ThreadLocalRandom.current().nextLong(0, timeLimit - timeStart);
+        var callEnd = callStart + ThreadLocalRandom.current().nextLong(1, timeLimit - timeStart);
 
         var maintenanceCustomer = availableCustomers.get(maintenance);
         var connectionCustomer = availableCustomers.get(connection);
-        transactions.put(new Transaction(type, maintenanceCustomer.getNumber(), connectionCustomer.getNumber(),
-                callStart, callEnd));
+        transactions.put(
+                Transaction.builder()
+                        .type(type)
+                        .maintenance(maintenanceCustomer.getNumber())
+                        .connection(connectionCustomer.getNumber())
+                        .start(callStart)
+                        .end(callEnd).build()
+        );
         if (connectionCustomer.isRomashka()) {
-            transactions.put(new Transaction((short) (type % 2 == 0 ? 1 : 2), connectionCustomer.getNumber(),
-                    maintenanceCustomer.getNumber(), callStart, callEnd));
+            transactions.put(
+                    Transaction.builder()
+                            .type((short) (type % 2 == 0 ? 1 : 2))
+                            .maintenance(connectionCustomer.getNumber())
+                            .connection(maintenanceCustomer.getNumber())
+                            .start(callStart)
+                            .end(callEnd).build()
+            );
         }
 
         return callEnd;

@@ -18,7 +18,7 @@ public class TimeUtils {
     public long getEndOfMonthUnixTime(LocalDate date) {
         return date.plusMonths(1)
                 .atStartOfDay().minusSeconds(1)
-                .toInstant(ZoneOffset.UTC).toEpochMilli() / 1000;
+                .toInstant(OFFSET).toEpochMilli() / 1000;
     }
 
 }

@@ -1,6 +1,6 @@
 package com.example.commutator.config.kafka;
 
-import com.example.commutator.model.Transaction;
+import com.example.commutator.model.entity.Transaction;
 import lombok.RequiredArgsConstructor;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -64,7 +64,7 @@ public class KafkaConfiguration {
 
         props.put(ProducerConfig.ACKS_CONFIG, "all");
 
-        props.put(ProducerConfig.RETRIES_CONFIG, 1);
+        props.put(ProducerConfig.RETRIES_CONFIG, 3);
 
         return props;
     }
