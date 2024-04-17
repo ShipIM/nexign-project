@@ -31,3 +31,10 @@ spring:
           uri: http://service-discovery:8761
           predicates:
             - Path=/eureka/**
+
+        ## H2 Route
+
+        - id: h2-commutator
+          uri: lb://commutator
+          predicates:
+            - Path=/h2-console/**

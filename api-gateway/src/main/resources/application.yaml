@@ -40,5 +40,13 @@ spring:
           uri: http://localhost:8761
           predicates:
             - Path=/eureka/**
+
+        ## H2 Route
+
+        - id: h2-commutator
+          uri: lb://commutator
+          predicates:
+            - Path=/h2-console/**
+
   application:
     name: api-gateway
