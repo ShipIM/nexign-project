@@ -1,6 +1,5 @@
 package com.example.commutator.service;
 
-import com.example.commutator.exception.EntityNotFoundException;
 import com.example.commutator.model.entity.Cdr;
 import com.example.commutator.model.entity.Transaction;
 import com.example.commutator.repository.CdrRepository;
@@ -38,19 +37,8 @@ public class CdrService {
         );
 
         kafkaTemplate.send(topic, transactions)
-                .whenComplete((result, exception) -> updateCdrStatus(cdr.getId(), Objects.isNull(exception)));
-    }
-
-    private void updateCdrStatus(long id, boolean status) {
-        var cdr = getCdrById(id);
-        cdr.setSent(status);
-
-        cdrRepository.save(cdr);
-    }
-
-    public Cdr getCdrById(long id) {
-        return cdrRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("There is no cdr with this id"));
+                .whenComplete((result, exception) -> cdrRepository
+                        .updateStatusByCdrId(cdr.getId(), Objects.isNull(exception)));
     }
 
 }
