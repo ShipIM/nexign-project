@@ -30,7 +30,7 @@ spring:
     password: password
 
 generator:
-  writers-amount: 200
+  writers-amount: 3
   cdr-size: 10
   year: 2024
   month-start: 1

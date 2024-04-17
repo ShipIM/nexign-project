@@ -64,7 +64,7 @@ public class KafkaConfiguration {
 
         props.put(ProducerConfig.ACKS_CONFIG, "all");
 
-        props.put(ProducerConfig.RETRIES_CONFIG, 3);
+        props.put(ProducerConfig.RETRIES_CONFIG, 1);
 
         return props;
     }
