@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 public interface CdrRepository extends CrudRepository<Cdr, Long> {
 
     /**
-     * Updates the sent status of a Call Detail Record (CDR) based on the provided CDR id.
+     * Updates the sent status of a Call Data Record (CDR) based on the provided CDR id.
      *
      * @param cdrId the id of the Call Detail Record (CDR) to be updated
      * @param sent the new sent status to be set
