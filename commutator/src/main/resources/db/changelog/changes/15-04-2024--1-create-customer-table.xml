@@ -11,7 +11,7 @@
             </column>
             <column name="is_romashka" type="BOOLEAN">
                 <constraints
-                    nullable="false"/>
+                        nullable="false"/>
             </column>
         </createTable>
     </changeSet>

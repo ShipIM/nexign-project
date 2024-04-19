@@ -9,6 +9,10 @@
                 <constraints
                         primaryKey="true"/>
             </column>
+            <column name="file" type="VARCHAR">
+                <constraints
+                        nullable="false"/>
+            </column>
             <column name="is_sent" type="BOOLEAN"/>
             <column name="created_date" type="DATE">
                 <constraints

@@ -19,7 +19,9 @@ import java.time.LocalDate;
 public class Cdr {
 
     @Id
-    private long id;
+    private Long id;
+
+    private String file;
 
     @Column("IS_SENT")
     private boolean sent;
@@ -27,5 +29,9 @@ public class Cdr {
     @Column("CREATED_DATE")
     @CreatedDate
     private LocalDate created;
+
+    public Cdr(String file) {
+        this.file = file;
+    }
 
 }

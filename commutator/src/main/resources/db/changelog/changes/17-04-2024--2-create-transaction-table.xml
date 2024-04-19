@@ -11,7 +11,7 @@
             </column>
             <column name="call_type" type="TINYINT">
                 <constraints
-                    nullable="false"/>
+                        nullable="false"/>
             </column>
             <column name="maintenance_number" type="BIGINT">
                 <constraints

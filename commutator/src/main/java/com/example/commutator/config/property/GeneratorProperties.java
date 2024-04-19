@@ -9,9 +9,13 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "generator")
 public class GeneratorProperties {
 
+    private boolean generate;
+
+    private String cdrPath;
+
     private int writersAmount;
 
-    private int cdrSize;
+    private int cdrCapacity;
 
     private int year;
 

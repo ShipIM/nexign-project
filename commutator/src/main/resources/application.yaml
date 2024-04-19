@@ -32,8 +32,10 @@ spring:
     password: password
 
 generator:
+  generate: false
+  cdr-path: "nexign-project/commutator/cdr/"
   writers-amount: 3
-  cdr-size: 10
+  cdr-capacity: 10
   year: 2024
   month-start: 1
   month-end: 1

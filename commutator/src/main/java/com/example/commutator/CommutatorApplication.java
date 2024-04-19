@@ -24,9 +24,14 @@ public class CommutatorApplication implements CommandLineRunner, ApplicationCont
 
     @Override
     public void run(String... args) {
+        var properties = context.getBean(GeneratorProperties.class);
         var cdrGenerator = context.getBean(CdrGenerator.class);
 
-        cdrGenerator.generateCdr();
+        if (properties.isGenerate()) {
+            cdrGenerator.generateCdr();
+        } else {
+            cdrGenerator.readCdr();
+        }
     }
 
     @Override

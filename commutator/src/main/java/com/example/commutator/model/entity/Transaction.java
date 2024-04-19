@@ -35,7 +35,7 @@ public class Transaction implements Comparable<Transaction> {
 
     @JsonIgnore
     @Column("CDR_ID")
-    private long cdr;
+    private Long cdr;
 
     @Override
     public int compareTo(Transaction transaction) {

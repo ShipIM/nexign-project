@@ -3,13 +3,14 @@ package com.example.commutator.generator;
 import com.example.commutator.model.entity.Customer;
 import com.example.commutator.model.entity.Transaction;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.PriorityBlockingQueue;
 import java.util.concurrent.ThreadLocalRandom;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class TransactionGenerator implements Runnable {
 
     private final PriorityBlockingQueue<Transaction> transactions;
