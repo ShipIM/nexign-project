@@ -28,11 +28,11 @@ public class TransactionWriter implements ObjectWriter<Transaction> {
                 Files.createFile(filePath);
             }
 
-            var csvContent = transactions.stream()
-                    .map(transaction -> converter.convertTo(transaction) + "\n")
+            var content = transactions.stream()
+                    .map(converter::convertTo)
                     .collect(Collectors.joining());
 
-            Files.writeString(filePath, csvContent);
+            Files.writeString(filePath, content);
         } catch (IOException e) {
             throw new FileWriteException("Unable to write to file: " + filePath);
         }

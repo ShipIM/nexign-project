@@ -31,16 +31,19 @@ public class CdrServiceImpl implements CdrService {
     private final CdrRepository cdrRepository;
 
     @Transactional
-    public void processCdr(Path filePath) {
+    public Cdr processCdr(Path filePath) {
         var transactions = transactionReader.read(filePath);
 
         var cdr = cdrRepository.save(new Cdr(filePath.toString()));
+
         transactions.forEach(transaction -> transaction.setCdr(cdr.getId()));
         transactionRepository.saveAll(transactions);
 
         kafkaTemplate.send(topic, transactions)
                 .whenComplete((result, exception) -> cdrRepository
                         .updateStatusByCdrId(cdr.getId(), Objects.isNull(exception)));
+
+        return cdr;
     }
 
 }

@@ -112,10 +112,14 @@ public class CdrGenerator {
 
     @EventListener(ContextRefreshedEvent.class)
     public void startGeneration() {
-        if (generatorProperties.isGenerate()) {
-            generateCdr();
-        } else {
-            readCdr();
+        try {
+            if (generatorProperties.isGenerate()) {
+                generateCdr();
+            } else {
+                readCdr();
+            }
+        } catch (Exception e) {
+            System.out.println("Unable to generate cdr files");
         }
     }
 

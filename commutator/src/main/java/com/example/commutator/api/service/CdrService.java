@@ -1,9 +1,11 @@
 package com.example.commutator.api.service;
 
+import com.example.commutator.model.entity.Cdr;
+
 import java.nio.file.Path;
 
 public interface CdrService {
 
-    void processCdr(Path filePath);
+    Cdr processCdr(Path filePath);
 
 }

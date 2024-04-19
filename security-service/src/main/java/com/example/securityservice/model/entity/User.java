@@ -1,6 +1,5 @@
 package com.example.securityservice.model.entity;
 
-import com.example.securityutils.entity.enumeration.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

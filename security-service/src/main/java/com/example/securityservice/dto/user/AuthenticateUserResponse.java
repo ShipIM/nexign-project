@@ -1,6 +1,6 @@
 package com.example.securityservice.dto.user;
 
-import com.example.securityutils.entity.enumeration.Role;
+import com.example.securityservice.model.entity.Role;
 import lombok.Getter;
 import lombok.Setter;
 
