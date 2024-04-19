@@ -5,7 +5,7 @@ import com.example.commutator.model.entity.Cdr;
 import java.nio.file.Path;
 
 /**
- * Interface defining the contract for processing Call Detail Records (CDR) from a specified file path.
+ * Interface defining the contract for processing Call Data Records (CDR) from a specified file path.
  */
 public interface CdrService {
 
