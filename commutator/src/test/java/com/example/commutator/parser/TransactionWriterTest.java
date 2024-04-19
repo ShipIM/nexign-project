@@ -37,7 +37,7 @@ public class TransactionWriterTest extends BaseTest {
         var stringRepresentation = "transaction";
         Mockito.when(converter.convertTo(transaction)).thenReturn(stringRepresentation);
 
-        Path filePath = tempDir.resolve("transactions.csv");
+        Path filePath = tempDir.resolve("cdr/transactions.csv");
 
         writer.write(filePath, transactions);
 
@@ -49,7 +49,7 @@ public class TransactionWriterTest extends BaseTest {
     public void write_EmptyTransactionsList() throws IOException {
         List<Transaction> transactions = Collections.emptyList();
 
-        Path filePath = tempDir.resolve("transactions.csv");
+        Path filePath = tempDir.resolve("cdr/transactions.csv");
 
         writer.write(filePath, transactions);
 
