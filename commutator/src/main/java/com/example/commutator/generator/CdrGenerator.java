@@ -9,6 +9,8 @@ import com.example.commutator.parser.TransactionWriter;
 import com.example.commutator.repository.CustomerRepository;
 import com.example.commutator.util.TimeUtils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -105,6 +107,15 @@ public class CdrGenerator {
             files.forEach(cdrService::processCdr);
         } catch (IOException e) {
             throw new FileReadException("Unable to read specified directory");
+        }
+    }
+
+    @EventListener(ContextRefreshedEvent.class)
+    public void startGeneration() {
+        if (generatorProperties.isGenerate()) {
+            generateCdr();
+        } else {
+            readCdr();
         }
     }
 
