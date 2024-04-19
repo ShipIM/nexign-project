@@ -6,7 +6,7 @@ import com.example.commutator.exception.FileReadException;
 import com.example.commutator.model.entity.Customer;
 import com.example.commutator.model.entity.Transaction;
 import com.example.commutator.parser.TransactionWriter;
-import com.example.commutator.repository.CustomerRepository;
+import com.example.commutator.api.repository.CustomerRepository;
 import com.example.commutator.util.TimeUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -24,6 +24,10 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executors;
 import java.util.concurrent.PriorityBlockingQueue;
 
+/**
+ * This class is responsible for generating and processing Call Detail Records (CDRs).
+ * It contains methods to either generate CDRs or read them from an existing directory, based on the configuration.
+ */
 @Component
 @RequiredArgsConstructor
 public class CdrGenerator {
@@ -39,6 +43,14 @@ public class CdrGenerator {
 
     private final CdrService cdrService;
 
+    /**
+     * Generates Call Detail Records (CDRs) by using multiple threads to generate transactions
+     * within a specific time range and then writing these transactions to files.
+     *
+     * The method utilizes a priority blocking queue to collect transactions and a buffer list
+     * to store and process transactions when the capacity is reached. Transactions are written
+     * to files, which are then processed by the CDR service.
+     */
     public void generateCdr() {
         var queue = new PriorityBlockingQueue<Transaction>();
 
@@ -93,6 +105,12 @@ public class CdrGenerator {
         }
     }
 
+    /**
+     * Reads Call Detail Records (CDRs) from the specified directory and processes them using the CDR service.
+     * It retrieves the list of files, sorts them based on their name, and processes each file one by one.
+     *
+     * @throws FileReadException if an I/O error occurs while reading the directory
+     */
     public void readCdr() {
         var directory = Path.of(generatorProperties.getCdrPath());
 
@@ -110,6 +128,10 @@ public class CdrGenerator {
         }
     }
 
+    /**
+     * Starts the generation or reading process of CDRs based on the configuration.
+     * It is triggered when the application is started.
+     */
     @EventListener(ContextRefreshedEvent.class)
     public void startGeneration() {
         try {

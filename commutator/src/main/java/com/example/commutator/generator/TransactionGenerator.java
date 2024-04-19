@@ -9,6 +9,12 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.PriorityBlockingQueue;
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * This class generates transactions and adds them to a priority queue.
+ *
+ * After generating transactions within the given time range, the class signals
+ * the completion of the generation process by decrementing the `countDownLatch`.
+ */
 @RequiredArgsConstructor
 public class TransactionGenerator implements Runnable {
 
@@ -18,6 +24,11 @@ public class TransactionGenerator implements Runnable {
     private final long timeStart;
     private final long timeLimit;
 
+    /**
+     * Executes the transaction generation process. It initializes the start time and continues
+     * to generate transactions within the given time range until the time limit is reached.
+     * Once completed, it decrements the `countDownLatch` to signal completion.
+     */
     @Override
     public void run() {
         var callStart = timeStart;
@@ -29,6 +40,12 @@ public class TransactionGenerator implements Runnable {
         countDownLatch.countDown();
     }
 
+    /**
+     * Generates a transaction based on the current call start time.
+     *
+     * @param callStart the start time for the current transaction
+     * @return the end time of the generated transaction
+     */
     private long generateTransaction(long callStart) {
         var customersAmount = availableCustomers.size() - 1;
 
