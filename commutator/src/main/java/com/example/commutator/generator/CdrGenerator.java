@@ -1,12 +1,12 @@
 package com.example.commutator.generator;
 
+import com.example.commutator.api.service.CdrService;
 import com.example.commutator.config.property.GeneratorProperties;
 import com.example.commutator.exception.FileReadException;
 import com.example.commutator.model.entity.Customer;
 import com.example.commutator.model.entity.Transaction;
 import com.example.commutator.parser.TransactionWriter;
 import com.example.commutator.repository.CustomerRepository;
-import com.example.commutator.service.CdrService;
 import com.example.commutator.util.TimeUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

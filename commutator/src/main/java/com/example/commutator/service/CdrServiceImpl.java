@@ -1,5 +1,6 @@
 package com.example.commutator.service;
 
+import com.example.commutator.api.service.CdrService;
 import com.example.commutator.model.entity.Cdr;
 import com.example.commutator.model.entity.Transaction;
 import com.example.commutator.parser.TransactionReader;
@@ -17,7 +18,7 @@ import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
-public class CdrService {
+public class CdrServiceImpl implements CdrService {
 
     @Value("${spring.kafka.topic.outbound-topic}")
     private String topic;

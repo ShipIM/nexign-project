@@ -2,7 +2,6 @@ package com.example.commutator.generator;
 
 import com.example.commutator.model.entity.Customer;
 import com.example.commutator.model.entity.Transaction;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
