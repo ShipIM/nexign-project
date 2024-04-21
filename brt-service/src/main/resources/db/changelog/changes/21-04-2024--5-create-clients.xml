@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    <changeSet author="ShipIM" id="21-04-2024--5-create-clients">
+        <insert schemaName="brt_service" tableName="client">
+            <column name="telephone_number" value="74954990243"/>
+            <column name="name" value="Arnold Smith"/>
+            <column name="balance" value="585"/>
+            <column name="tariff_id" value="11"/>
+        </insert>
+        <insert schemaName="brt_service" tableName="client">
+            <column name="telephone_number" value="74790614082"/>
+            <column name="name" value="Amanda Ramirez"/>
+            <column name="balance" value="540"/>
+            <column name="tariff_id" value="12"/>
+        </insert>
+        <insert schemaName="brt_service" tableName="client">
+            <column name="telephone_number" value="76301336509"/>
+            <column name="name" value="Bernard Palmer"/>
+            <column name="balance" value="360"/>
+            <column name="tariff_id" value="11"/>
+        </insert>
+        <insert schemaName="brt_service" tableName="client">
+            <column name="telephone_number" value="78459967293"/>
+            <column name="name" value="Linda Shaw"/>
+            <column name="balance" value="777"/>
+            <column name="tariff_id" value="12"/>
+        </insert>
+        <insert schemaName="brt_service" tableName="client">
+            <column name="telephone_number" value="72013335525"/>
+            <column name="name" value="Daniel Nelson"/>
+            <column name="balance" value="696"/>
+            <column name="tariff_id" value="11"/>
+        </insert>
+        <insert schemaName="brt_service" tableName="client">
+            <column name="telephone_number" value="79231403499"/>
+            <column name="name" value="Nicole Murray"/>
+            <column name="balance" value="596"/>
+            <column name="tariff_id" value="12"/>
+        </insert>
+        <insert schemaName="brt_service" tableName="client">
+            <column name="telephone_number" value="79246886975"/>
+            <column name="name" value="Glen Roberts"/>
+            <column name="balance" value="7"/>
+            <column name="tariff_id" value="11"/>
+        </insert>
+        <insert schemaName="brt_service" tableName="client">
+            <column name="telephone_number" value="78275455700"/>
+            <column name="name" value="Doris Phillips"/>
+            <column name="balance" value="925"/>
+            <column name="tariff_id" value="12"/>
+        </insert>
+        <insert schemaName="brt_service" tableName="client">
+            <column name="telephone_number" value="73608544992"/>
+            <column name="name" value="Julian Miller"/>
+            <column name="balance" value="21"/>
+            <column name="tariff_id" value="11"/>
+        </insert>
+        <insert schemaName="brt_service" tableName="client">
+            <column name="telephone_number" value="72072068353"/>
+            <column name="name" value="John Brown"/>
+            <column name="balance" value="104"/>
+            <column name="tariff_id" value="12"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    <changeSet author="ShipIM" id="21-04-2024--3-create-client-table">
+        <createTable schemaName="brt_service" tableName="client">
+            <column name="telephone_number" type="BIGINT">
+                <constraints
+                        primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR">
+                <constraints
+                        nullable="false"/>
+            </column>
+            <column name="balance" type="BIGINT">
+                <constraints
+                        nullable="false"/>
+            </column>
+            <column name="tariff_id" type="BIGINT">
+                <constraints
+                        nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableSchemaName="brt_service" baseTableName="client" baseColumnNames="tariff_id"
+                                 constraintName="client_tariff_id_fkey"
+                                 referencedTableSchemaName="brt_service" referencedTableName="tariff" referencedColumnNames="tariff_id"
+                                 onDelete="CASCADE" onUpdate="CASCADE"/>
+    </changeSet>
+</databaseChangeLog>
