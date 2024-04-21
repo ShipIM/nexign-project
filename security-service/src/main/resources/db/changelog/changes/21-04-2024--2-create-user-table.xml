@@ -4,15 +4,10 @@
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
     <changeSet author="ShipIM" id="21-04-2024--2-create-user-table">
-        <createTable tableName="_user" schemaName="security_service">
-            <column name="id" type="BIGINT" autoIncrement="true">
+        <createTable schemaName="security_service" tableName="_user">
+            <column name="login" type="VARCHAR">
                 <constraints
                         primaryKey="true"/>
-            </column>
-            <column name="username" type="VARCHAR">
-                <constraints
-                        nullable="false"
-                        unique="true" uniqueConstraintName="user_unique"/>
             </column>
             <column name="password" type="VARCHAR">
                 <constraints
