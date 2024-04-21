@@ -5,4 +5,4 @@ eureka:
 
 spring:
   datasource:
-    url: jdbc:postgresql://nexign-postgres:5432/security-service
+    url: jdbc:postgresql://nexign-postgres:5432/nexign-project

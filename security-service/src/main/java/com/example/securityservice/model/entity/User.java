@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
-@Table(name = "_user")
+@Table(name = "security_service\".\"_user")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

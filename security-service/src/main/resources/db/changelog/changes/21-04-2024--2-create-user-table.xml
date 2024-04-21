@@ -3,8 +3,8 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
-    <changeSet author="ShipIM" id="03-04-2024--1-create-user-table">
-        <createTable tableName="_user">
+    <changeSet author="ShipIM" id="21-04-2024--2-create-user-table">
+        <createTable tableName="_user" schemaName="security_service">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints
                         primaryKey="true"/>

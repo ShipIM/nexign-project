@@ -11,7 +11,7 @@ services:
       - 'POSTGRES_USER=postgres'
       - 'POSTGRES_PASSWORD=postgres'
       - 'POSTGRES_HOST_AUTH_METHOD=trust'
-      - 'POSTGRES_DB=security-service'
+      - 'POSTGRES_DB=nexign-project'
   service-discovery:
     container_name: 'service-discovery'
     build:
